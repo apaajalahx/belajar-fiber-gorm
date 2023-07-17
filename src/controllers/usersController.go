@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"dinarhamid/golanglearn/system"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -11,10 +13,5 @@ func UserController() *UserHandlers {
 }
 
 func (h *UserHandlers) GetUser(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"name":        "Dinar Hamid",
-		"username":    "dinar1337",
-		"email":       "palkna3@gmail.com",
-		"is_verified": true,
-	})
+	return c.JSON(system.ResponseHandler("success", 200, []string{}))
 }
