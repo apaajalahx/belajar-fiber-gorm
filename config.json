@@ -1,0 +1,6 @@
+{
+    "AppName" : "Learn Golang",
+    "JwtSecret" : "JRB17MkURC4J1xMdPFJa",
+    "DatabaseUrl" : "dinarhamid",
+    "port" : 3000
+}
