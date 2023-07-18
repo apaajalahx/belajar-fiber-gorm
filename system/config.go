@@ -9,6 +9,8 @@ import (
 type ConfigInterface struct {
 	DatabaseUrl string `json:"databaseUrl"`
 	Port        int    `json:"port"`
+	JwtSecret   string `json:"JwtSecret"`
+	AppName     string `json:"AppName"`
 }
 
 func LoadConfig(configFile string) error {
@@ -25,6 +27,8 @@ func LoadConfig(configFile string) error {
 
 	os.Setenv("DATABASE_URL", config.DatabaseUrl)
 	os.Setenv("PORT", strconv.Itoa(config.Port))
+	os.Setenv("JWT_SECRET", config.JwtSecret)
+	os.Setenv("APP_NAME", config.AppName)
 
 	return nil
 

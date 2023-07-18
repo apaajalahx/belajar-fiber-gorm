@@ -20,12 +20,14 @@ func main() {
 	app := fiber.New()
 
 	UserHandler := controllers.UserController()
+	AuthHandler := controllers.AuthController()
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString(os.Getenv("port"))
 	})
 
-	routes.RegisterUser(app, UserHandler)
+	routes.RegisterUserRoutes(app, UserHandler)
+	routes.RegisterAuthRoutes(app, AuthHandler)
 
 	app.Listen(":3000")
 }
