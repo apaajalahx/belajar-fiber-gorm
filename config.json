@@ -1,6 +1,6 @@
 {
     "AppName" : "Learn Golang",
     "JwtSecret" : "JRB17MkURC4J1xMdPFJa",
-    "DatabaseUrl" : "dinarhamid",
+    "DatabaseUrl" : "root:@tcp(127.0.0.1:3306)/golanglearn?charset=utf8mb4&parseTime=True&loc=Local",
     "port" : 3000
 }
