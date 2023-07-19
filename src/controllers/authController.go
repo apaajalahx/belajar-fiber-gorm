@@ -26,7 +26,26 @@ type Login struct {
 }
 
 func (h *AuthHandler) Login(c *fiber.Ctx) error {
-	token, err := system.Sign("DinarHamid123", "palkna3@gmail.com")
+
+	var login Login
+
+	c.BodyParser(&login)
+
+	result, err := h.model.GetOne(&models.UserModel{
+		Username: login.Username,
+	})
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.Status(404).JSON(system.ResponseHandler(err.Error(), 404, []string{}))
+		}
+	}
+
+	if !system.CheckPassword(login.Password, result.Password) {
+		c.Status(401).JSON(system.ResponseHandler("Wrong Username or password", 401, []string{}))
+	}
+
+	token, err := system.Sign(result.Id, result.Username, result.Password)
 	if err != nil {
 		return c.Status(500).JSON(system.ResponseHandler(err.Error(), 500, []string{}))
 	}

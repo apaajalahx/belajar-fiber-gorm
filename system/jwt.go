@@ -8,6 +8,7 @@ import (
 )
 
 type ClaimsUsers struct {
+	Id       int    `json:"id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	jwt.RegisteredClaims
@@ -26,9 +27,10 @@ func Verify(tokenString string) (*ClaimsUsers, error) {
 	}
 }
 
-func Sign(username string, email string) (string, error) {
+func Sign(id int, username string, email string) (string, error) {
 
 	claims := ClaimsUsers{
+		id,
 		username,
 		email,
 		jwt.RegisteredClaims{
