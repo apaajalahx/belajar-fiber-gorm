@@ -4,7 +4,6 @@ import (
 	"dinarhamid/golanglearn/src/models"
 	"dinarhamid/golanglearn/system"
 	"errors"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -50,10 +49,10 @@ func (h *AuthHandler) Register(c *fiber.Ctx) error {
 
 	c.BodyParser(&request)
 
-	res, errs := h.model.GetOne(&models.UserModel{
+	_, errs := h.model.GetOne(&models.UserModel{
 		Email: request.Email,
 	})
-	fmt.Println(res)
+
 	if errors.Is(errs, gorm.ErrRecordNotFound) {
 
 		pwd, _ := system.HashPassword(request.Password)
